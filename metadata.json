@@ -1,0 +1,7 @@
+{
+  "name": "모두의 문제연구소 (EP Research Institute)",
+  "description": "데이터로 세상을 증명하는 모두의 문제연구소의 Venmo 스타일 랜딩 페이지입니다.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
