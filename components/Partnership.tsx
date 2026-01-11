@@ -7,7 +7,7 @@ const Partnership: React.FC = () => {
     contactPerson: '',
     email: '',
     phone: '',
-    type: '정책 자문',
+    type: '정책 자문 및 데이터 분석 요청',
     message: ''
   });
   const [submitted, setSubmitted] = useState(false);
@@ -21,7 +21,17 @@ const Partnership: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real app, this would send an email or save to DB
+    
+    // Save to LocalStorage for Admin Panel
+    const newInquiry = {
+      ...formData,
+      id: Date.now(),
+      submittedAt: new Date().toLocaleString()
+    };
+
+    const existingInquiries = JSON.parse(localStorage.getItem('partnership_inquiries') || '[]');
+    localStorage.setItem('partnership_inquiries', JSON.stringify([...existingInquiries, newInquiry]));
+
     setTimeout(() => {
       setSubmitted(true);
       window.scrollTo(0, 0);

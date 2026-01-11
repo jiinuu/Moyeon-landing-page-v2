@@ -1,19 +1,20 @@
 
 import React, { useState } from 'react';
-import { generatePaymentNote } from '../services/geminiService';
-import { PaymentNote } from '../types';
+import { generatePaymentNote, ProjectIdea } from '../services/geminiService';
 
 const NoteGenerator: React.FC = () => {
   const [topic, setTopic] = useState('');
-  const [notes, setNotes] = useState<PaymentNote[]>([]);
+  const [ideas, setIdeas] = useState<ProjectIdea[]>([]);
   const [loading, setLoading] = useState(false);
 
   const handleGenerate = async () => {
     if (!topic) return;
     setLoading(true);
-    // Updated prompt for project ideas
-    const results = await generatePaymentNote(`Generate 3 creative and impactful data analysis project titles/themes about: "${topic}". Include an emoji. Focus on solving social problems or finding interesting insights.`);
-    setNotes(results);
+    
+    // 실제 Gemini API 호출
+    const results = await generatePaymentNote(topic);
+    
+    setIdeas(results);
     setLoading(false);
   };
 
@@ -44,30 +45,41 @@ const NoteGenerator: React.FC = () => {
             <button 
               onClick={handleGenerate}
               disabled={loading || !topic}
-              className="bg-[#2563EB] text-white px-8 py-4 rounded-2xl font-bold hover:bg-[#1d4ed8] disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg shadow-blue-200 whitespace-nowrap"
+              className="bg-[#2563EB] text-white px-8 py-4 rounded-2xl font-bold hover:bg-[#1d4ed8] disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg shadow-blue-200 whitespace-nowrap min-w-[140px] flex items-center justify-center"
             >
-              {loading ? '생성 중...' : '아이디어 찾기'}
+              {loading ? (
+                <span className="flex items-center gap-2">
+                  <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  생성 중
+                </span>
+              ) : '아이디어 찾기'}
             </button>
           </div>
 
           <div className="space-y-3 pt-2 text-left">
-            {notes.length > 0 && <p className="text-xs font-bold text-slate-400 uppercase tracking-widest pl-2 mb-2">Suggested Projects</p>}
-            {notes.map((note, idx) => (
+            {ideas.length > 0 && <p className="text-xs font-bold text-slate-400 uppercase tracking-widest pl-2 mb-2">Gemini's Suggestions</p>}
+            {ideas.map((idea, idx) => (
               <div 
                 key={idx} 
                 className="flex items-center justify-between p-5 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md hover:border-blue-200 hover:-translate-y-1 transition-all cursor-default group"
               >
-                <div className="flex items-center space-x-4">
-                  <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-xl shrink-0">
-                    {note.emoji}
+                <div className="flex items-center space-x-4 w-full">
+                  <div className="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center text-2xl shrink-0">
+                    {idea.emoji}
                   </div>
-                  <span className="font-bold text-slate-800 text-lg leading-tight">{note.text}</span>
+                  <div className="flex-1">
+                    <h3 className="font-bold text-slate-800 text-lg leading-tight mb-1">{idea.title}</h3>
+                    <p className="text-sm text-slate-500 font-medium">{idea.desc}</p>
+                  </div>
                 </div>
               </div>
             ))}
-            {notes.length === 0 && !loading && (
+            {ideas.length === 0 && !loading && (
                <div className="py-8 text-center text-slate-400 text-sm font-medium bg-slate-50/50 rounded-2xl border border-dashed border-slate-200">
-                 👆 위 상자에 관심사(예: '치킨집 폐업률')를 입력해보세요.
+                 👆 위 상자에 관심사(예: '치킨집 폐업률')를 입력하면<br/> Gemini가 프로젝트 주제를 추천해줍니다.
                </div>
             )}
           </div>
