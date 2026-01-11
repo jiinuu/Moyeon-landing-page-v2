@@ -43,28 +43,28 @@ const Features: React.FC = () => {
         <div className="grid md:grid-cols-3 gap-12">
           {features.map((f, i) => (
             <div key={i} className="group cursor-pointer">
-              <div className="aspect-[4/3] overflow-hidden rounded-[2rem] mb-6 bg-slate-100 shadow-xl border border-gray-100 flex items-center justify-center">
+              <div className="aspect-[4/3] overflow-hidden rounded-[2rem] mb-6 bg-slate-100 shadow-xl border border-gray-100 flex items-center justify-center relative">
+                <div className="absolute inset-0 bg-[#2563EB]/0 group-hover:bg-[#2563EB]/10 transition-colors duration-500 z-10" />
                 <img 
                   src={f.image} 
                   alt={f.title} 
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" 
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
-                    // Fallback to a solid data-related image if the specific one fails
                     target.src = `https://images.unsplash.com/photo-1551288049-bbbda536339a?auto=format&fit=crop&w=800&q=80`;
                   }}
                 />
               </div>
               <div className="flex items-center space-x-2 mb-3">
-                 <span className="text-[10px] font-mono font-bold text-[#008CFF]/50">[{f.index}]</span>
+                 <span className="text-[10px] font-mono font-bold text-[#2563EB]/50">[{f.index}]</span>
                  <span className="px-2 py-0.5 text-[10px] font-bold tracking-widest uppercase border border-slate-200 bg-slate-50 text-slate-600 rounded-full">{f.tag}</span>
               </div>
-              <h3 className="text-2xl font-black text-slate-900 mb-2 group-hover:text-[#008CFF] transition-colors">{f.title}</h3>
-              <p className="font-bold text-[#008CFF] mb-3 text-sm">{f.subtitle}</p>
+              <h3 className="text-2xl font-black text-slate-900 mb-2 group-hover:text-[#2563EB] transition-colors">{f.title}</h3>
+              <p className="font-bold text-[#2563EB] mb-3 text-sm">{f.subtitle}</p>
               <p className="text-slate-600 leading-relaxed text-sm mb-4">{f.desc}</p>
               <div className="flex flex-wrap gap-2">
                  {f.outputs.map((out, idx) => (
-                   <span key={idx} className="bg-slate-50 border border-slate-100 px-3 py-1 rounded-lg text-[10px] font-bold text-slate-500 uppercase tracking-tighter">{out}</span>
+                   <span key={idx} className="bg-slate-50 border border-slate-100 px-3 py-1 rounded-lg text-[10px] font-bold text-slate-500 uppercase tracking-tighter group-hover:border-blue-200 transition-colors">{out}</span>
                  ))}
               </div>
             </div>

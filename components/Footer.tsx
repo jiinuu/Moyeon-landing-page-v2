@@ -1,46 +1,56 @@
 
 import React from 'react';
 
-const Footer: React.FC = () => {
+interface FooterProps {
+  onNavigate: (view: 'home' | 'history') => void;
+}
+
+const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   return (
     <footer className="bg-white border-t border-gray-100 pt-20 pb-12 px-6">
       <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-5 gap-10">
         <div className="col-span-2 space-y-6">
-          <div className="text-2xl font-black tracking-tighter text-[#008CFF]">모두의 문제연구소</div>
-          <p className="text-slate-500 max-w-xs text-sm leading-relaxed">
+          <div className="flex items-center gap-3 cursor-pointer" onClick={() => onNavigate('home')}>
+             <div className="w-8 h-8 rounded-lg bg-[#2563EB] flex items-center justify-center">
+                 <div className="w-4 h-4 rounded bg-white"></div>
+             </div>
+             <div className="text-2xl font-black tracking-tighter text-[#2563EB]">모두의 문제연구소</div>
+          </div>
+          <p className="text-slate-500 max-w-xs text-sm leading-relaxed font-medium">
+            <span className="block text-[#2563EB] font-bold mb-1">Mission: 사회를 이롭게</span>
             한양대학교 ERICA 수리데이터사이언스학과 소속 데이터 저널리즘 및 리서치 학회입니다.
           </p>
           <div className="flex space-x-4">
-            <div className="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center text-slate-600 hover:bg-[#008CFF] hover:text-white transition-colors cursor-pointer text-xs font-bold">In</div>
-            <div className="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center text-slate-600 hover:bg-[#008CFF] hover:text-white transition-colors cursor-pointer text-xs font-bold">Ig</div>
-            <div className="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center text-slate-600 hover:bg-[#008CFF] hover:text-white transition-colors cursor-pointer text-xs font-bold">Et</div>
+            <div className="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center text-slate-600 hover:bg-[#2563EB] hover:text-white transition-colors cursor-pointer text-xs font-bold">In</div>
+            <div className="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center text-slate-600 hover:bg-[#2563EB] hover:text-white transition-colors cursor-pointer text-xs font-bold">Ig</div>
+            <div className="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center text-slate-600 hover:bg-[#2563EB] hover:text-white transition-colors cursor-pointer text-xs font-bold">Et</div>
           </div>
         </div>
         
         <div className="space-y-4">
           <h4 className="font-bold text-slate-900">활동</h4>
           <ul className="text-sm text-slate-600 space-y-2">
-            <li><a href="#" className="hover:text-black font-medium">데이터 저널리즘</a></li>
-            <li><a href="#" className="hover:text-black font-medium">엘리트 빌더</a></li>
-            <li><a href="#" className="hover:text-black font-medium">인사이트 리그</a></li>
+            <li><button onClick={() => onNavigate('home')} className="hover:text-[#2563EB] font-medium transition-colors text-left">데이터 저널리즘</button></li>
+            <li><button onClick={() => onNavigate('home')} className="hover:text-[#2563EB] font-medium transition-colors text-left">엘리트 빌더</button></li>
+            <li><button onClick={() => onNavigate('home')} className="hover:text-[#2563EB] font-medium transition-colors text-left">인사이트 리그</button></li>
           </ul>
         </div>
 
         <div className="space-y-4">
           <h4 className="font-bold text-slate-900">학회</h4>
           <ul className="text-sm text-slate-600 space-y-2">
-            <li><a href="#" className="hover:text-black font-medium">연구소 소개</a></li>
-            <li><a href="#" className="hover:text-black font-medium">구성원</a></li>
-            <li><a href="#" className="hover:text-black font-medium">연혁</a></li>
+            <li><button onClick={() => onNavigate('home')} className="hover:text-[#2563EB] font-medium transition-colors text-left">연구소 소개</button></li>
+            <li><button onClick={() => onNavigate('home')} className="hover:text-[#2563EB] font-medium transition-colors text-left">구성원</button></li>
+            <li><button onClick={() => onNavigate('history')} className="hover:text-[#2563EB] font-medium transition-colors text-left">연혁</button></li>
           </ul>
         </div>
 
         <div className="space-y-4">
           <h4 className="font-bold text-slate-900">지원</h4>
           <ul className="text-sm text-slate-600 space-y-2">
-            <li><a href="#" className="hover:text-black font-medium">FAQ</a></li>
-            <li><a href="#" className="hover:text-black font-medium">문의하기</a></li>
-            <li><a href="#" className="hover:text-black font-medium">지원하기</a></li>
+            <li><button className="hover:text-[#2563EB] font-medium transition-colors text-left">FAQ</button></li>
+            <li><button className="hover:text-[#2563EB] font-medium transition-colors text-left">문의하기</button></li>
+            <li><button className="hover:text-[#2563EB] font-medium transition-colors text-left">지원하기</button></li>
           </ul>
         </div>
       </div>
