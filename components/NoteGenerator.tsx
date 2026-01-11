@@ -11,7 +11,8 @@ const NoteGenerator: React.FC = () => {
   const handleGenerate = async () => {
     if (!topic) return;
     setLoading(true);
-    const results = await generatePaymentNote(`Generate 3 creative research insight summary titles or hashtags for a data journalism project about: ${topic}. Focus on social impact and benefits.`);
+    // Updated prompt for project ideas
+    const results = await generatePaymentNote(`Generate 3 creative and impactful data analysis project titles/themes about: "${topic}". Include an emoji. Focus on solving social problems or finding interesting insights.`);
     setNotes(results);
     setLoading(false);
   };
@@ -20,50 +21,55 @@ const NoteGenerator: React.FC = () => {
     <section className="bg-slate-50 py-24 px-6">
       <div className="max-w-4xl mx-auto text-center space-y-8">
         <div className="inline-block bg-blue-100 text-[#2563EB] px-4 py-1.5 rounded-full text-sm font-bold tracking-wide uppercase">
-          AI Insight Assistant
+          AI Project Brainstorming
         </div>
-        <h2 className="text-4xl md:text-5xl font-black tracking-tighter text-slate-900">Get Inspired by Gemini</h2>
-        <p className="text-xl text-slate-600">
-          데이터 스토리의 완벽한 앵글을 찾고 계신가요? AI와 함께 사회를 이롭게 할 인사이트를 발견해보세요.
+        <h2 className="text-4xl md:text-5xl font-black tracking-tighter text-slate-900">
+          어떤 문제를 해결하고 싶나요?
+        </h2>
+        <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+          관심 있는 사회 이슈나 키워드를 입력해보세요.<br/>
+          AI가 데이터로 풀어낼 수 있는 흥미로운 프로젝트 주제를 제안해드립니다.
         </p>
 
-        <div className="bg-white p-8 rounded-3xl shadow-xl space-y-6 max-w-2xl mx-auto border border-gray-100">
+        <div className="bg-white p-8 rounded-[2.5rem] shadow-xl space-y-6 max-w-2xl mx-auto border border-gray-100">
           <div className="flex flex-col sm:flex-row gap-3">
             <input 
               type="text" 
               value={topic}
               onChange={(e) => setTopic(e.target.value)}
-              placeholder="주제 (예: 기후 변화, 공공 데이터)"
-              className="flex-1 px-6 py-4 rounded-2xl border-2 border-gray-100 focus:border-[#2563EB] outline-none text-lg transition-colors"
+              placeholder="키워드 입력 (예: 대중교통, 환경오염, 저출산)"
+              className="flex-1 px-8 py-5 rounded-2xl bg-slate-50 border-2 border-slate-100 focus:border-[#2563EB] focus:bg-white outline-none text-lg transition-all font-medium placeholder:text-slate-400"
+              onKeyDown={(e) => e.key === 'Enter' && handleGenerate()}
             />
             <button 
               onClick={handleGenerate}
               disabled={loading || !topic}
-              className="bg-[#2563EB] text-white px-8 py-4 rounded-2xl font-bold hover:bg-[#1d4ed8] disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg shadow-blue-200"
+              className="bg-[#2563EB] text-white px-8 py-4 rounded-2xl font-bold hover:bg-[#1d4ed8] disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg shadow-blue-200 whitespace-nowrap"
             >
-              {loading ? '분석 중...' : '인사이트 생성'}
+              {loading ? '생성 중...' : '아이디어 찾기'}
             </button>
           </div>
 
-          <div className="grid gap-3 pt-4">
+          <div className="space-y-3 pt-2 text-left">
+            {notes.length > 0 && <p className="text-xs font-bold text-slate-400 uppercase tracking-widest pl-2 mb-2">Suggested Projects</p>}
             {notes.map((note, idx) => (
               <div 
                 key={idx} 
-                className="flex items-center justify-between p-4 bg-slate-50 rounded-xl border border-transparent hover:border-blue-200 transition-all cursor-pointer group"
-                onClick={() => {
-                   navigator.clipboard.writeText(`${note.text} ${note.emoji}`);
-                   alert('인사이트가 복사되었습니다!');
-                }}
+                className="flex items-center justify-between p-5 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md hover:border-blue-200 hover:-translate-y-1 transition-all cursor-default group"
               >
                 <div className="flex items-center space-x-4">
-                  <span className="text-2xl">{note.emoji}</span>
-                  <span className="font-medium text-slate-800 text-left">{note.text}</span>
+                  <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-xl shrink-0">
+                    {note.emoji}
+                  </div>
+                  <span className="font-bold text-slate-800 text-lg leading-tight">{note.text}</span>
                 </div>
-                <span className="text-xs font-bold text-[#2563EB] opacity-0 group-hover:opacity-100 uppercase tracking-wider">
-                  Copy
-                </span>
               </div>
             ))}
+            {notes.length === 0 && !loading && (
+               <div className="py-8 text-center text-slate-400 text-sm font-medium bg-slate-50/50 rounded-2xl border border-dashed border-slate-200">
+                 👆 위 상자에 관심사(예: '치킨집 폐업률')를 입력해보세요.
+               </div>
+            )}
           </div>
         </div>
       </div>
