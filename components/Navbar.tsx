@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 
 interface NavbarProps {
@@ -11,27 +10,41 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
   return (
     <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 px-6 py-4 transition-all">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
-        {/* Left Side: Hanyang University Logo Image */}
-        <div className="flex items-center gap-6 cursor-pointer" onClick={() => onNavigate('home')}>
+        {/* Left Side: Logo & Department Name */}
+        <div className="flex items-center gap-3 cursor-pointer" onClick={() => onNavigate('home')}>
           <img 
-            src="http://computing.hanyang.ac.kr/img/logo_hy.gif" 
+            src="https://github.com/jiinuu/jiinuu.github.io/blob/6c703d1744c6cd2f18b9a09a75712ed60f23f53a/Screenshot%202025-12-18%20191440.png?raw=true" 
             alt="한양대학교 ERICA 소프트웨어융합대학" 
             className="h-10 md:h-12 w-auto object-contain"
           />
           
+          {/* Department Name (Target Style) */}
+          <div className="flex flex-col justify-center">
+             <span className="text-sm md:text-base font-black text-slate-900 leading-none tracking-tight">
+               수리데이터사이언스학과
+             </span>
+             <span className="text-[10px] md:text-[11px] font-semibold text-slate-500 leading-none mt-0.5 uppercase tracking-tighter">
+               Mathematical Data Science
+             </span>
+          </div>
+          
           {/* Divider */}
-          <div className="hidden md:block h-6 w-px bg-gray-200"></div>
+          <div className="hidden md:block h-6 w-px bg-gray-200 ml-2"></div>
 
-          {/* Official Mark (Small Version for Navbar) */}
+          {/* Official Mark (Lab Name) */}
           <div className="hidden md:flex items-center gap-2">
              <div className="w-8 h-8 flex items-center justify-center bg-[#2563EB] rounded-lg shadow-sm">
-                <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5 text-white" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M7 7H11V17H7V7Z" fill="currentColor" rx="1"/>
-                  <path d="M13 7H17V17H13V7Z" fill="currentColor" rx="1"/>
-                  <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="2"/>
-                </svg>
+                <img 
+                  src="https://github.com/jiinuu/jiinuu.github.io/blob/6c703d1744c6cd2f18b9a09a75712ed60f23f53a/402337326_657879323001534_477076322436472498_n.jpg?raw=true" 
+                  alt="아이콘" 
+                  className="w-8 h-8 rounded-lg object-cover"
+                />
              </div>
-             <span className="font-bold text-slate-800 text-sm tracking-tight">모두의 문제연구소</span>
+             
+             {/* ▼▼▼ 변경됨: 학과명과 동일한 스타일 적용 ▼▼▼ */}
+             <span className="text-sm md:text-base font-black text-slate-900 leading-none tracking-tight">
+                모두의 문제연구소
+             </span>
           </div>
         </div>
 

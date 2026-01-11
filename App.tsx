@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -15,6 +14,38 @@ const App: React.FC = () => {
     window.scrollTo(0, 0);
   };
 
+  // ▼▼▼ 수정됨: 요청하신 문구 아이디어를 적용한 데이터 배열 ▼▼▼
+  const marqueeData = [
+    {
+      target: "정책 담당자",
+      message: "탁상공론은 그만, 데이터로 진짜 수요가 있는 곳을 확인하세요.",
+      tag: "#정책미스매치_해결"
+    },
+    {
+      target: "사회 활동가",
+      message: "막연한 외침 대신, 객관적인 숫자로 문제의 심각성을 증명하세요.",
+      tag: "#데이터_에비던스"
+    },
+    {
+      target: "저널리스트",
+      message: "우리가 알던 통념이 사실일까요? 데이터로 사회의 이면을 비춰보세요.",
+      tag: "#팩트체크_저널리즘"
+    },
+    {
+      target: "대학생",
+      message: "세상을 바꾸는 작은 아이디어, 데이터로 당신의 가설을 입증해보세요.",
+      tag: "#데이터_분석학회"
+    },
+    {
+      target: "로컬 기획자",
+      message: "감에 의존하는 기획은 그만, 데이터로 지역의 숨은 매력을 발굴하세요.",
+      tag: "#로컬데이터_인사이트"
+    }
+  ];
+
+  // 마키 효과가 끊기지 않게 배열을 두 번 이어 붙임 (총 10개 카드 렌더링)
+  const infiniteMarqueeItems = [...marqueeData, ...marqueeData];
+
   return (
     <div className="min-h-screen bg-white selection:bg-blue-100 selection:text-[#2563EB]">
       <Navbar onNavigate={navigateTo} />
@@ -24,19 +55,34 @@ const App: React.FC = () => {
           <>
             <Hero />
             
-            {/* Activity Simulation Section */}
+            {/* Activity Simulation Section (Marquee) */}
             <section className="bg-slate-50 py-12 overflow-hidden border-y border-gray-100">
                <div className="max-w-7xl mx-auto px-6">
-                 <div className="flex space-x-12 animate-marquee whitespace-nowrap">
-                    {[...Array(5)].map((_, i) => (
-                      <div key={i} className="flex items-center space-x-4 bg-white px-6 py-4 rounded-2xl shadow-sm border border-gray-100">
-                        <img src={`https://picsum.photos/40/40?random=${i + 30}`} className="w-10 h-10 rounded-full border-2 border-slate-50" alt="User" />
-                        <div>
-                          <p className="text-sm font-bold text-slate-900">연구원 {i+1}님이 데이터를 증명했습니다</p>
-                          <p className="text-xs text-slate-500">#{['사회적가치', '경제분석', '공익데이터', '환경데이터', '빅데이터'][i]}</p>
-                        </div>
-                      </div>
-                    ))}
+                 <div className="flex space-x-8 animate-marquee whitespace-nowrap">
+                   {/* ▼▼▼ 수정됨: 위에서 정의한 데이터를 매핑하여 카드 생성 ▼▼▼ */}
+                   {infiniteMarqueeItems.map((item, i) => (
+                     <div key={i} className="flex items-start space-x-4 bg-white px-6 py-5 rounded-2xl shadow-sm border border-gray-100 min-w-[320px] max-w-[320px]">
+                       <img 
+                         src={`https://picsum.photos/40/40?random=${i + 50}`} 
+                         className="w-10 h-10 rounded-full border-2 border-slate-50 shrink-0" 
+                         alt="User Icon" 
+                       />
+                       <div className="flex flex-col whitespace-normal">
+                         {/* 타겟 페르소나 (파란색 강조) */}
+                         <p className="text-sm font-bold text-[#2563EB] mb-0.5">{item.target}</p>
+                         
+                         {/* 메인 메시지 (기존보다 조금 더 길어져서 줄바꿈 허용 및 폰트 조정) */}
+                         <p className="text-xs text-slate-700 font-medium leading-relaxed mb-2">
+                           {item.message}
+                         </p>
+                         
+                         {/* 해시태그 */}
+                         <p className="text-[10px] font-bold text-slate-400 bg-slate-50 inline-block px-2 py-1 rounded-md self-start">
+                           {item.tag}
+                         </p>
+                       </div>
+                     </div>
+                   ))}
                  </div>
                </div>
             </section>
@@ -50,8 +96,8 @@ const App: React.FC = () => {
               <div className="max-w-4xl mx-auto space-y-16 text-center">
                 <div className="space-y-4">
                   <div className="flex items-center justify-center space-x-3">
-                     <span className="text-sm font-mono font-bold text-[#2563EB]/50">[05]</span>
-                     <span className="px-3 py-1 text-xs font-bold tracking-widest uppercase border border-indigo-200 bg-indigo-50 text-[#2563EB] rounded-full">Our Spirit</span>
+                      <span className="text-sm font-mono font-bold text-[#2563EB]/50">[05]</span>
+                      <span className="px-3 py-1 text-xs font-bold tracking-widest uppercase border border-indigo-200 bg-indigo-50 text-[#2563EB] rounded-full">Our Spirit</span>
                   </div>
                   <h2 className="text-5xl md:text-8xl font-black tracking-tighter text-slate-900 leading-[0.9]">COLD DATA<br/>HOT HEART</h2>
                 </div>
@@ -114,7 +160,7 @@ const App: React.FC = () => {
         .animate-marquee {
           display: flex;
           width: 200%;
-          animation: marquee 35s linear infinite;
+          animation: marquee 40s linear infinite; /* 속도를 조금 늦춰 가독성 확보 (35s -> 40s) */
         }
         .animate-marquee:hover {
           animation-play-state: paused;
