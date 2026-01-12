@@ -1,7 +1,11 @@
 
 import { GoogleGenAI, Type } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+// Vercel(Vite) 환경에서는 import.meta.env.VITE_API_KEY를 사용해야 합니다.
+// process.env.API_KEY는 Node.js 환경이나 일부 다른 번들러 호환용입니다.
+const apiKey = (import.meta as any).env?.VITE_API_KEY || process.env.API_KEY || '';
+
+const ai = new GoogleGenAI({ apiKey: apiKey });
 
 // 인터페이스 정의를 프로젝트 아이디어로 변경
 export interface ProjectIdea {
@@ -12,6 +16,16 @@ export interface ProjectIdea {
 
 export const generatePaymentNote = async (context: string): Promise<ProjectIdea[]> => {
   try {
+    // API 키가 없는 경우 얼리 리턴하여 불필요한 호출 방지 및 안내 메시지 반환
+    if (!apiKey) {
+      console.error("API Key is missing. Please check VITE_API_KEY in Vercel settings.");
+      return [
+        { title: "API 키 설정 필요", desc: "Vercel 환경변수에 VITE_API_KEY를 등록해주세요.", emoji: "⚙️" },
+        { title: "설정 후 재배포", desc: "변수 추가 후 Redeploy가 필요합니다.", emoji: "🔄" },
+        { title: "키 확인", desc: "AIza로 시작하는 키인지 확인하세요.", emoji: "🔑" }
+      ];
+    }
+
     const response = await ai.models.generateContent({
       model: "gemini-3-flash-preview",
       contents: `You are a creative Data Science Mentor. Generate 3 interesting and social-impact oriented data analysis project ideas based on the keyword: "${context}".

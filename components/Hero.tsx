@@ -1,25 +1,47 @@
 
 import React from 'react';
 
+// ✨ [수정 방법] 아래 따옴표 안의 주소를 원하시는 동영상(mp4) 또는 움직이는 이미지(webp, gif) 링크로 바꿔주세요!
+// 현재 입력하신 .webp 링크도 자동으로 인식하여 작동하도록 수정했습니다.
+const VIDEO_URL = "https://pieibfaeeoxwnqbhdbis.supabase.co/storage/v1/object/sign/Jinwoo%20park/____1-ezgif.com-video-to-webp-converter.webp?token=eyJraWQiOiJzdG9yYWdlLXVybC1zaWduaW5nLWtleV82NzE4NGU5Zi1jYTA4LTRlOTItYjdhYS1jMTQ2NjY1MWU2YjAiLCJhbGciOiJIUzI1NiJ9.eyJ1cmwiOiJKaW53b28gcGFyay9fX19fMS1lemdpZi5jb20tdmlkZW8tdG8td2VicC1jb252ZXJ0ZXIud2VicCIsImlhdCI6MTc2ODE5NDkwNSwiZXhwIjoxNzk5NzMwOTA1fQ.m1AJHCuhUNqYBlDVsSbHX80A3EqYLa5uFmILCgYhguc"; 
+
 interface HeroProps {
   onNavigate: (view: 'activity' | 'partnership') => void;
 }
 
 const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
+  // URL이 비디오 파일인지 이미지 파일인지 확장자로 판단하는 함수
+  const isVideo = (url: string) => {
+    const cleanUrl = url.split('?')[0].toLowerCase();
+    return cleanUrl.endsWith('.mp4') || cleanUrl.endsWith('.webm') || cleanUrl.endsWith('.mov');
+  };
+
   return (
     <section className="relative py-24 px-6 overflow-hidden flex items-center min-h-[80vh]">
       
-      {/* Background Logo Watermark (수정됨: 더 잘 보이도록 투명도 증가 및 블러 제거) */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] md:w-[800px] md:h-[800px] opacity-[0.2] pointer-events-none select-none -z-10 flex items-center justify-center">
-         <img 
-           src="https://github.com/jiinuu/jiinuu.github.io/blob/6c703d1744c6cd2f18b9a09a75712ed60f23f53a/402337326_657879323001534_477076322436472498_n.jpg?raw=true" 
-           alt="Background Watermark" 
-           className="w-full h-full object-cover rounded-full mix-blend-multiply"
-         />
+      {/* Background Layer (Supports both Video and Image) */}
+      <div className="absolute inset-0 w-full h-full -z-20">
+        {isVideo(VIDEO_URL) ? (
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover"
+          >
+            <source src={VIDEO_URL} type="video/mp4" />
+          </video>
+        ) : (
+          <img 
+            src={VIDEO_URL} 
+            alt="background" 
+            className="w-full h-full object-cover"
+          />
+        )}
       </div>
 
-      {/* Subtle Blue Gradient Blob (Existing) */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-100/40 rounded-full blur-[100px] -z-20 pointer-events-none"></div>
+      {/* White Overlay for Text Readability (Venmo Style Maintenance) */}
+      <div className="absolute inset-0 bg-white/85 -z-10 backdrop-blur-[2px]"></div>
 
       <div className="max-w-4xl mx-auto w-full text-center space-y-10 relative z-10">
         
