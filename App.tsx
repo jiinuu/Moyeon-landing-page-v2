@@ -170,7 +170,7 @@ const App: React.FC = () => {
         {currentView === 'research' && <Research />}
         {currentView === 'topic' && <TopicSuggestion />}
         {currentView === 'faq' && <FAQ />}
-        {currentView === 'members' && <Members />}
+        {currentView === 'members' && <Members onNavigate={navigateTo} />}
         {currentView === 'admin' && <Admin />}
         {currentView === 'elite-builder' && <EliteBuilder onNavigate={navigateTo} />}
         {currentView === 'insight-league' && <InsightLeague />}
