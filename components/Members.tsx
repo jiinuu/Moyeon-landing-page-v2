@@ -11,6 +11,7 @@ const Members: React.FC<MembersProps> = ({ onNavigate }) => {
     { role: '연구원', name: '나동욱', major: '수리데이터사이언스학과 학부과정', img: 'https://ui-avatars.com/api/?name=Dongwook+Na&background=random&color=fff' },
     { role: '연구원', name: '한주형', major: '수리데이터사이언스학과 학부과정', img: 'https://ui-avatars.com/api/?name=Juhyeong+Han&background=random&color=fff' },
     { role: '연구원', name: '조우진', major: '수리데이터사이언스학과 학부과정', img: 'https://ui-avatars.com/api/?name=Woojin+Jo&background=random&color=fff' },
+    { role: '연구원', name: '김기정', major: '수리데이터사이언스학과 학부과정', img: 'https://ui-avatars.com/api/?name=Gijeong+Kim&background=random&color=fff' },
   ];
 
   return (
