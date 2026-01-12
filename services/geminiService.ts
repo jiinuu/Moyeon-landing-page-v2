@@ -35,7 +35,7 @@ export const generatePaymentNote = async (context: string): Promise<ProjectIdea[
       2. A very short description (under 10 words) of what to analyze.
       3. A relevant emoji.
       
-      Output strictly in JSON format.`,
+      Output strictly in JSON format and korean.`,
       config: {
         responseMimeType: "application/json",
         responseSchema: {
