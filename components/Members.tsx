@@ -11,7 +11,6 @@ const Members: React.FC<MembersProps> = ({ onNavigate }) => {
     { role: '연구원', name: '나동욱', major: '수리데이터사이언스학과 학부과정', img: 'https://ui-avatars.com/api/?name=Dongwook+Na&background=random&color=fff' },
     { role: '연구원', name: '한주형', major: '수리데이터사이언스학과 학부과정', img: 'https://ui-avatars.com/api/?name=Juhyeong+Han&background=random&color=fff' },
     { role: '연구원', name: '조우진', major: '수리데이터사이언스학과 학부과정', img: 'https://ui-avatars.com/api/?name=Woojin+Jo&background=random&color=fff' },
-    { role: '연구원', name: '김기정', major: '수리데이터사이언스학과 학부과정', img: 'https://ui-avatars.com/api/?name=Gijeong+Kim&background=random&color=fff' },
   ];
 
   return (
@@ -26,7 +25,7 @@ const Members: React.FC<MembersProps> = ({ onNavigate }) => {
 
         {/* Professor Section */}
         <div className="bg-slate-50 rounded-[3rem] p-8 md:p-12 border border-slate-100 mb-24">
-           <div className="flex flex-col lg:flex-row gap-12">
+           <div className="flex flex-col lg:flex-row gap-12 items-start">
               
               {/* Profile Card */}
               <div className="w-full lg:w-1/3 flex-shrink-0">
@@ -81,63 +80,11 @@ const Members: React.FC<MembersProps> = ({ onNavigate }) => {
                     </h3>
                     <div className="text-slate-600 leading-relaxed text-lg space-y-4 mb-8">
                       <p>
-                        안녕하세요, 지도교수 정혜영입니다. 제가 이끄는 <strong>Intelligence Data Science Lab (IDSL)</strong>은 AI가 무엇을 예측하는가보다, <strong>"그 예측을 언제 신뢰해야 하고, 언제 멈춰야 하는가"</strong>를 연구합니다. 불확실한 현실 세계에서 AI가 실패하는 지점을 아는 것이야말로 진정한 지능이기 때문입니다.
+                        안녕하세요, 지도교수 정혜영입니다. 저는 <strong>모두의 문제연구소</strong> 학생들이 단순히 데이터를 분석하는 기술을 넘어, <strong>데이터 뒤에 숨겨진 불확실성을 탐구하고, 사회적 책임감을 갖춘 의사결정</strong>을 내릴 수 있는 인재로 성장하기를 바랍니다.
                       </p>
                       <p>
-                        저는 <strong>모두의 문제연구소</strong> 학생들이 이러한 철학을 바탕으로 성장하기를 바랍니다. 단순히 데이터를 분석하는 기술을 넘어, <strong>데이터 뒤에 숨겨진 불확실성을 탐구하고, 사회적 책임감을 갖춘 의사결정</strong>을 내릴 수 있는 인재로 키우고자 합니다.
+                         <strong>"데이터가 무엇을 예측하는가보다, 그 예측을 언제 신뢰해야 하는가"</strong>를 고민하는 자세야말로 진정한 데이터 사이언티스트의 덕목이기 때문입니다. 여러분이 이곳에서 정의하는 문제와 제안하는 솔루션이, 더 안전하고 신뢰할 수 있는 세상을 만드는 단단한 초석이 되기를 기대합니다.
                       </p>
-                      <p>
-                        여러분이 이곳에서 정의하는 문제와 제안하는 솔루션이, 더 안전하고 신뢰할 수 있는 세상을 만드는 단단한 초석이 되기를 기대합니다.
-                      </p>
-                    </div>
-                 </div>
-
-                 <div className="space-y-4">
-                    <h4 className="font-bold text-slate-900 border-b border-gray-200 pb-3 mb-6 flex items-center gap-2">
-                       <span className="bg-slate-900 text-white w-6 h-6 rounded-full inline-flex items-center justify-center text-xs">Lab</span>
-                       Research Foundations (IDSL)
-                    </h4>
-                    
-                    {/* System 1 */}
-                    <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:border-blue-200 transition-colors group">
-                       <div className="flex items-start gap-5">
-                          <div className="w-12 h-12 rounded-xl bg-blue-50 text-[#2563EB] flex items-center justify-center text-2xl group-hover:scale-110 transition-transform flex-shrink-0">🏥</div>
-                          <div>
-                             <h5 className="font-bold text-slate-900 text-base mb-1">System 1 (Medical)</h5>
-                             <p className="text-xs font-bold text-[#2563EB] uppercase tracking-wide mb-2">Uncertainty-Aware Medical Decision Support Systems</p>
-                             <p className="text-sm text-slate-500 leading-relaxed">
-                               의료 영상, 생체 신호, 임상 시계열 데이터에서 AI 예측의 불확실성과 이상 패턴을 분석하여 자동 진단을 그대로 사용할 수 없는 상황을 탐지합니다. AI 판단의 신뢰도가 저하되는 구간을 사전에 식별하여 의료진의 개입이 필요한 시점을 데이터로 설명합니다.
-                             </p>
-                          </div>
-                       </div>
-                    </div>
-
-                    {/* System 2 */}
-                    <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:border-blue-200 transition-colors group">
-                       <div className="flex items-start gap-5">
-                          <div className="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform flex-shrink-0">📈</div>
-                          <div>
-                             <h5 className="font-bold text-slate-900 text-base mb-1">System 2 (Financial)</h5>
-                             <p className="text-xs font-bold text-indigo-600 uppercase tracking-wide mb-2">Risk-Aware Financial Decision Control Systems</p>
-                             <p className="text-sm text-slate-500 leading-relaxed">
-                               거래 데이터와 금융 시계열에서 발생하는 이상 징후, 분포 변화, 예측 불안정성의 누적 양상을 분석합니다. 자동화된 금융 의사결정이 언제 중단되거나 수동 검토로 전환되어야 하는지를 판단하는 분석 프레임워크를 개발하여 신중한 의사결정을 지원합니다.
-                             </p>
-                          </div>
-                       </div>
-                    </div>
-
-                    {/* System 3 */}
-                    <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:border-blue-200 transition-colors group">
-                       <div className="flex items-start gap-5">
-                          <div className="w-12 h-12 rounded-xl bg-slate-100 text-slate-600 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform flex-shrink-0">🤖</div>
-                          <div>
-                             <h5 className="font-bold text-slate-900 text-base mb-1">System 3 (Physical AI)</h5>
-                             <p className="text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">Safe Decision and Action Transition for Physical AI</p>
-                             <p className="text-sm text-slate-500 leading-relaxed">
-                               로봇 및 자율 시스템 환경에서 센서 데이터와 시계열 정보를 활용하여, AI의 판단이 실제 행동으로 이어질 때의 위험을 분석합니다. 센서 불확실성을 기반으로 AI 시스템이 스스로 판단을 보류하거나 인간 제어로 전환해야 하는 기준을 연구합니다.
-                             </p>
-                          </div>
-                       </div>
                     </div>
                  </div>
               </div>
@@ -153,7 +100,7 @@ const Members: React.FC<MembersProps> = ({ onNavigate }) => {
                 <img src={m.img} alt={m.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all" />
               </div>
               <h3 className="text-lg font-bold text-slate-900 mb-1">{m.name}</h3>
-              <p className="text-[#2563EB] font-bold text-xs uppercase tracking-wide mb-2">{m.role}</p>
+              <p className="text--[#2563EB] font-bold text-xs uppercase tracking-wide mb-2">{m.role}</p>
               <p className="text-slate-500 text-xs font-medium">{m.major}</p>
             </div>
           ))}
