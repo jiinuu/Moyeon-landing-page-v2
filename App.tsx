@@ -150,7 +150,7 @@ const App: React.FC = () => {
                 </div>
                 <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
                     <button onClick={() => navigateTo('apply')} className="w-full sm:w-auto bg-white text-[#2563EB] px-10 py-5 rounded-full text-xl font-bold hover:bg-blue-50 transition-all shadow-2xl transform hover:scale-105 active:scale-95 flex items-center justify-center gap-2">
-                      <span>학생 연구원 지원하기</span>
+                      <span>학회원 지원하기</span>
                       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                     </button>
                     <button onClick={() => navigateTo('partnership')} className="w-full sm:w-auto bg-[#1d4ed8] text-white border border-white/20 px-10 py-5 rounded-full text-xl font-bold hover:bg-[#1e40af] transition-all flex items-center justify-center gap-2">
